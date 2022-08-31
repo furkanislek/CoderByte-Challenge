@@ -9,3 +9,23 @@
 // Output: 12
 // Input: [5, 6, 7, 4, 1]
 // Output: 16
+
+function HistogramArea(arr) {
+
+    arr.push(0);
+    let stack = [];
+    let res = 0;
+    for (let i = 0; i < arr.length; i++) {
+      let arrStart = i;
+      while (stack.length && stack[stack.length - 1][1] > arr[i]) {
+        let [pos, arrH] = stack.pop();
+        res = Math.max(res, (i - pos) * arrH);
+        arrStart = pos;
+      }
+      stack.push([arrStart, arr[i]]);
+    }
+    return res;
+  }
+  
+  // keep this function call here 
+  console.log(HistogramArea(readline()));
